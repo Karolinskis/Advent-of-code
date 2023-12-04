@@ -45,6 +45,33 @@ public class Day04 : BaseDay
 
     public override ValueTask<string> Solve_2()
     {
-        return new ValueTask<string>($"Hello");
+        Dictionary<int, int> pairs = new Dictionary<int, int>(); // <lineNum, ticketCount>
+        for (int i = 0; i < _input.Length; i++)
+            pairs.Add(i + 1, 1);
+
+        for (int i = 0; i < _input.Length; i++)
+        {
+            string line = _input[i];
+
+            string[] split = line.Split('|');
+            string[] winningNumbersStr = split[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            string[] numbersWeHaveStr = split[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            int[] winningNumbers = Array.ConvertAll(winningNumbersStr, int.Parse);
+            int[] numbersWeHave = Array.ConvertAll(numbersWeHaveStr, int.Parse);
+
+            for (int j = 0; j < winningNumbers.Intersect(numbersWeHave).Count(); j++)
+            {
+                pairs[i + 1 + j + 1] += pairs[i + 1];
+            }
+        }   
+
+        int result = 0;
+        foreach (var pair in pairs)
+        {
+            result += pair.Value;
+        }
+
+        return new ValueTask<string>($"{result}");
     }
 }
