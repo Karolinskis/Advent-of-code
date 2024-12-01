@@ -1,9 +1,10 @@
+using Common;
 using System.Drawing;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode;
+namespace AoC_2023;
 
-public class Day03 : BaseDay
+public class Day03 : Base2023Day
 {
     private readonly string[] _input;
 
@@ -45,9 +46,9 @@ public class Day03 : BaseDay
             .Select(gearParts => gearParts.First() * gearParts.Last())
         .Sum();
 
-    static IEnumerable<GridNumber> GetAllGridNumbers(Regex numberRegex, string row, int rowIndex) => numberRegex.Matches(row).Select(match => 
+    static IEnumerable<GridNumber> GetAllGridNumbers(Regex numberRegex, string row, int rowIndex) => numberRegex.Matches(row).Select(match =>
         new GridNumber(int.Parse(match.Value), FromMatch(match, rowIndex)));
-    static IEnumerable<GridSymbol> GetAllGridSymbols(Regex symbolRegex, string row, int rowIndex) => symbolRegex.Matches(row).Select(match => 
+    static IEnumerable<GridSymbol> GetAllGridSymbols(Regex symbolRegex, string row, int rowIndex) => symbolRegex.Matches(row).Select(match =>
         new GridSymbol(FromMatch(match, rowIndex)));
 
     static Rectangle FromMatch(Match match, int rowIndex) => Rectangle.FromLTRB(match.Index - 1, rowIndex - 1, match.Index + match.Length, rowIndex + 1);

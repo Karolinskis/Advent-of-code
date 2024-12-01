@@ -1,6 +1,7 @@
-namespace AdventOfCode;
+using Common;
+namespace AoC_2023;
 
-public class Day05 : BaseDay
+public class Day05 : Base2023Day
 {
     private readonly string[] _input;
     List<long> seeds;
@@ -9,7 +10,7 @@ public class Day05 : BaseDay
     public Day05()
     {
         _input = File.ReadAllLines(InputFilePath);
-    
+
         seeds = _input[0].Split(' ').Skip(1).Select(x => long.Parse(x)).ToList();
         maps = new List<List<(long source, long destination, long length)>>();
         List<(long source, long destination, long length)> currentMap = null;
@@ -56,7 +57,7 @@ public class Day05 : BaseDay
                 }
             }
             result = Math.Min(result, value);
-        }      
+        }
 
         return new ValueTask<string>($"{result}");
     }
@@ -109,7 +110,7 @@ public class Day05 : BaseDay
             ranges = newranges;
         }
 
-        return new ValueTask<string>($"{ranges.Min(r => r.source)}");        
+        return new ValueTask<string>($"{ranges.Min(r => r.source)}");
     }
 }
 

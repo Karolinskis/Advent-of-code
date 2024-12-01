@@ -1,8 +1,9 @@
+using Common;
 using System.Text.RegularExpressions;
 
-namespace AdventOfCode;
+namespace AoC_2023;
 
-public class Day02 : BaseDay
+public class Day02 : Base2023Day
 {
     private readonly string _input;
     private readonly int RED_CUBES = 12;
@@ -15,7 +16,7 @@ public class Day02 : BaseDay
         _input = File.ReadAllText(InputFilePath);
     }
 
-    public override ValueTask<string> Solve_1() 
+    public override ValueTask<string> Solve_1()
     {
         int gameID = 1;
         int gameIDs = 0;
@@ -33,7 +34,7 @@ public class Day02 : BaseDay
         return new ValueTask<string>($"{gameIDs}");
     }
 
-    public override ValueTask<string> Solve_2() 
+    public override ValueTask<string> Solve_2()
     {
         int power = 0;
 
@@ -47,7 +48,7 @@ public class Day02 : BaseDay
         }
 
         return new ValueTask<string>($"{power}");
-    } 
+    }
 
     private bool isPossible(string line)
     {
@@ -60,23 +61,23 @@ public class Day02 : BaseDay
             int blueCount = 0;
 
             string[] pull = split[i].Split(',', StringSplitOptions.TrimEntries);
-            foreach (string cube in pull) 
+            foreach (string cube in pull)
             {
-                if(cube.Contains("red"))
+                if (cube.Contains("red"))
                 {
                     string[] parts = cube.Split(' ');
                     redCount = int.Parse(parts[0]);
                     continue;
                 }
 
-                if(cube.Contains("green"))
+                if (cube.Contains("green"))
                 {
                     string[] parts = cube.Split(' ');
                     greenCount = int.Parse(parts[0]);
                     continue;
                 }
 
-                if(cube.Contains("blue"))
+                if (cube.Contains("blue"))
                 {
                     string[] parts = cube.Split(' ');
                     blueCount = int.Parse(parts[0]);
@@ -84,7 +85,7 @@ public class Day02 : BaseDay
                 }
             }
 
-            if( redCount > RED_CUBES ||
+            if (redCount > RED_CUBES ||
                 greenCount > GREEN_CUBES ||
                 blueCount > BLUE_CUBES)
             {
@@ -106,23 +107,23 @@ public class Day02 : BaseDay
         for (int i = 1; i < split.Length; i++) // Ignore Game X:
         {
             string[] pull = split[i].Split(',', StringSplitOptions.TrimEntries);
-            foreach (string cube in pull) 
+            foreach (string cube in pull)
             {
-                if(cube.Contains("red"))
+                if (cube.Contains("red"))
                 {
                     string[] parts = cube.Split(' ');
                     minReds = Math.Max(minReds, int.Parse(parts[0]));
                     continue;
                 }
 
-                if(cube.Contains("green"))
+                if (cube.Contains("green"))
                 {
                     string[] parts = cube.Split(' ');
                     minGreens = Math.Max(minGreens, int.Parse(parts[0]));
                     continue;
                 }
 
-                if(cube.Contains("blue"))
+                if (cube.Contains("blue"))
                 {
                     string[] parts = cube.Split(' ');
                     minBlues = Math.Max(minBlues, int.Parse(parts[0]));

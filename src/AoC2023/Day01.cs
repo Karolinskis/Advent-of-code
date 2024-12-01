@@ -1,8 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using Common;
+using System.Text.RegularExpressions;
 
-namespace AdventOfCode;
+namespace AoC_2023;
 
-public class Day01 : BaseDay
+public class Day01 : Base2023Day
 {
     private readonly string _input;
 
@@ -11,7 +12,7 @@ public class Day01 : BaseDay
         _input = File.ReadAllText(InputFilePath);
     }
 
-    public override ValueTask<string> Solve_1() 
+    public override ValueTask<string> Solve_1()
     {
         int result = 0;
 
@@ -23,16 +24,20 @@ public class Day01 : BaseDay
                 int left = 0;
                 int right = 0;
                 // Left
-                for(int i = 0; i < line.Length; i++) {
-                    if (Char.IsDigit(line[i])) {
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (Char.IsDigit(line[i]))
+                    {
                         left = line[i] - '0';
                         break;
                     }
                 }
 
                 // Right
-                for(int i = line.Length - 1; i >= 0; i--) {
-                    if (Char.IsDigit(line[i])) {
+                for (int i = line.Length - 1; i >= 0; i--)
+                {
+                    if (Char.IsDigit(line[i]))
+                    {
                         right = line[i] - '0';
                         break;
                     }
@@ -45,7 +50,7 @@ public class Day01 : BaseDay
         return new ValueTask<string>($"{result}");
     }
 
-    public override ValueTask<string> Solve_2() 
+    public override ValueTask<string> Solve_2()
     {
         int result = 0;
         string pattern = @"\d|one|two|three|four|five|six|seven|eight|nine";
@@ -62,7 +67,7 @@ public class Day01 : BaseDay
         }
 
         return new ValueTask<string>($"{result}");
-    } 
+    }
 
     private static int Parse(string match)
     {
@@ -78,6 +83,6 @@ public class Day01 : BaseDay
             "eight" => 8,
             "nine" => 9,
             _ => int.Parse(match)
-        };        
+        };
     }
 }

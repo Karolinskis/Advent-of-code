@@ -1,6 +1,7 @@
-namespace AdventOfCode;
+using Common;
+namespace AoC_2023;
 
-public class Day04 : BaseDay
+public class Day04 : Base2023Day
 {
     private readonly string[] _input;
 
@@ -21,7 +22,7 @@ public class Day04 : BaseDay
             string[] split = line.Split('|');
             string[] winningNumbersStr = split[0].Split(':')[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
             string[] numbersWeHaveStr = split[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            
+
             int[] winningNumbers = Array.ConvertAll(winningNumbersStr, int.Parse);
             int[] numbersWeHave = Array.ConvertAll(numbersWeHaveStr, int.Parse);
 
@@ -31,7 +32,7 @@ public class Day04 : BaseDay
                 {
                     if (winningNumbers[i] == numbersWeHave[j])
                     {
-                        if(lineResult == 0) lineResult = 1;
+                        if (lineResult == 0) lineResult = 1;
                         else lineResult *= 2;
                     }
                 }
@@ -64,7 +65,7 @@ public class Day04 : BaseDay
             {
                 pairs[i + 1 + j + 1] += pairs[i + 1];
             }
-        }   
+        }
 
         int result = 0;
         foreach (var pair in pairs)
